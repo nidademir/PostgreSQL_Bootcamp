@@ -1,0 +1,40 @@
+---------------------------
+-- Belirli Kolonları Seçme
+---------------------------
+
+SELECT FirstName, LastName, Salary FROM Employees   -- Employees tablosundan FirstName, LastName, Salary kolonlarını seçip ekrana getirdik.
+
+
+-------------------
+-- DISTINCT Komutu
+-------------------
+
+SELECT DISTINCT departmentid FROM Employees   -- Departman kolonunun içindeki farklı değerleri ekrana getirdik.
+
+
+---------------------------------------
+-- Belirli bir departmana ait bilgiler
+---------------------------------------
+
+SELECT * FROM Employees  
+WHERE Departmentid = 1;    --Sadece IT departmanındaki (ID = 1) çalışanları filtreledik.
+
+
+------------------
+-- Maaş Sıralaması
+------------------
+
+SELECT * FROM Employees
+ORDER BY salary DESC     -- "ORDER BY" komutu ile sıralama yaptık. "DESC" ile büyükten küçüğe sıraladık.
+
+------------------------
+-- Kolonları Birleştime
+------------------------
+
+SELECT FirstName || ' ' || LastName   -- Ad ve soyadı birleştirerek yeni sütun oluşturduk.
+FROM Employees
+
+--CONCAT ile
+
+SELECT CONCAT(FirstName, ' ', LastName)  -- Ad ve soyadı birleştirerek yeni sütun oluşturduk.
+FROM Employees;  -- Çalışanların bulunduğu tablo
