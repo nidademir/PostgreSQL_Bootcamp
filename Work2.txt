@@ -1,4 +1,4 @@
-SELECT COUNT(*) 					    -- COUNT ile sayma işlemi yapacağımızı belirttik 
+SELECT COUNT(*) 					   -- COUNT ile sayma işlemi yapacağımızı belirttik 
 FROM invoice                           -- FROM ile hangi tabloda sorgu işlemi yapacağımızı belirttik
 WHERE 
     invoice_id IS NULL AND             -- invoice_id sütunu NULL olanları filtreler
@@ -27,4 +27,4 @@ SELECT
     invoice_date                                                                       -- Fatura tarihini getirir                            
 FROM invoice
 WHERE 
-    invoice_date BETWEEN '2013-08-01' AND '2013-08-31';    -- 2013'ün 8.ayına göre filtreledik
+    invoice_date BETWEEN '2013-08-01' AND '2013-08-31';                                -- 2013'ün 8.ayına göre filtreledik
