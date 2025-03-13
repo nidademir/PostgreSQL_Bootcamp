@@ -1,0 +1,30 @@
+SELECT COUNT(*) 					    -- COUNT ile sayma işlemi yapacağımızı belirttik 
+FROM invoice                           -- FROM ile hangi tabloda sorgu işlemi yapacağımızı belirttik
+WHERE 
+    invoice_id IS NULL AND             -- invoice_id sütunu NULL olanları filtreler
+    customer_id IS NULL AND 
+    invoice_date IS NULL AND 
+    billing_address IS NULL AND 
+    billing_city IS NULL AND 
+    billing_state IS NULL AND 
+    billing_country IS NULL AND 
+    billingpostal_code IS NULL AND 
+    total IS NULL;                     
+
+-- Row count: 0
+
+-----------------------------------------------------------------------------------------------------------
+SELECT 
+    invoice_id, 
+    total AS original_total,     -- Mevcut total değerini gösterdik original_total olarak adlandırdık
+    total * 2 AS updated_total   -- total değerinin iki katını hesaplayıp updated_total olarak adlandırdık
+FROM invoice
+ORDER BY updated_total DESC;     -- Yeni hesaplanan değere göre büyükten küçüğe sıraladık
+
+-------------------------------------------------------------------------------------------------------------
+SELECT 
+    LEFT(billing_address, 3) || '' || RIGHT(billing_address, 4) AS "Açık Adres",       -- Adresin ilk 3 karakterini ve son 4 karakterini alarak "Açık Adres" oluşturduk
+    invoice_date                                                                       -- Fatura tarihini getirir                            
+FROM invoice
+WHERE 
+    invoice_date BETWEEN '2013-08-01' AND '2013-08-31';    -- 2013'ün 8.ayına göre filtreledik
