@@ -1,0 +1,49 @@
+---------------------------------------------------------
+-- Soru:
+-- “USA” ülkesine ait, 2009 yılı içerisinde oluşturulmuş tüm faturaların (Invoice) toplamını
+-- listeleyen bir sorgu yazınız.
+---------------------------------------------------------
+
+SELECT SUM(total) AS total_invoice_amount   -- Faturaların toplam tutarını hesapla ve 'total_invoice_amount' olarak adlandır
+FROM invoice                                -- invoice tablosundan veri seç
+WHERE billing_country = 'USA'               -- Sadece 'USA' ülkesine ait faturaları seç
+AND EXTRACT(YEAR FROM invoice_date) = 2009  -- invoice_date tarihinden yılı çıkar ve 2009 yılına ait kayıtları filtrele
+
+---------------------------------------------------------
+-- Soru:
+-- Tüm parça (track) bilgilerini, bu parçaların ait olduğu playlisttrack ve playlist tablolarıyla birleştirerek
+-- (JOIN) listeleyen bir sorgu yazınız.
+---------------------------------------------------------
+
+SELECT 
+    track.*,                        -- track tablosundaki tüm sütunları getir
+    playlisttrack.playlist_id,      -- playlisttrack tablosundaki playlist_id değerini al
+    playlist.name AS playlist_name  -- playlist tablosundaki playlist adını al ve 'playlist_name' olarak adlandır
+FROM track
+JOIN playlisttrack ON track.track_id = playlisttrack.track_id          -- track ve playlisttrack tablolarını track_id üzerinden birleştir
+JOIN playlist ON playlisttrack.playlist_id = playlist.playlist_id;     -- playlisttrack ve playlist tablolarını playlist_id üzerinden birleştir
+
+---------------------------------------------------------
+-- Soru:
+-- "Let There Be Rock" adlı albüme ait tüm parçaları (Track) listeleyen, sanatçı (Artist) bilgisini
+-- de içeren bir sorgu yazınız. Ayrıca, sonuçları parça süresi (milliseconds) büyükten küçüğe
+-- sıralayınız.
+---------------------------------------------------------
+
+SELECT 
+    track.track_id,             -- Parçanın benzersiz kimliği
+    track.name AS track_name,   -- Parçanın adını al ve 'track_name' olarak adlandır
+    track.milliseconds,         -- Parçanın süresini getir
+    album.title AS album_name,  -- Albümün adını al ve 'album_name' olarak adlandır
+    artist.name AS artist_name  -- Sanatçının adını al ve 'artist_name' olarak adlandır
+FROM track
+JOIN album ON track.album_id = album.album_id      -- track ve album tablolarını album_id üzerinden birleştir
+JOIN artist ON album.artist_id = artist.artist_id  -- album ve artist tablolarını artist_id üzerinden birleştir
+WHERE album.title = 'Let There Be Rock'            -- Sadece 'Let There Be Rock' albümüne ait parçaları seç
+ORDER BY track.milliseconds DESC;                  -- Parçaları süreye göre büyükten küçüğe sırala
+
+
+
+
+
+
